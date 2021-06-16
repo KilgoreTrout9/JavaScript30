@@ -182,6 +182,20 @@
     </li>
   </ul>
 <script>
+  const timeNodes = [...document.querySelectorAll('[data-time]')];
+
+  const seconds = timeNodes
+    .map(node => node.dataset.time)
+    .map(timecode => {
+      const [mins, secs] = timecode.split(':').map(parseFloat);
+      return mins * 60 + secs;
+    })
+    .reduce((total, secs) => total + secs)
+
+
+  const finalTime = Math.floor(seconds / 3600) + ' hours, ' + Math.floor((seconds % 3600) / 60) + ' minutes and ' + (seconds % 60) + ' seconds';
+  console.log(finalTime);
+
 </script>
 </body>
 </html>
